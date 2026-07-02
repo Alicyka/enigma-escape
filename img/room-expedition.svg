@@ -1,0 +1,80 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="skyE" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a2408"/>
+      <stop offset="0.55" stop-color="#1c1206"/>
+      <stop offset="1" stop-color="#0b0804"/>
+    </linearGradient>
+    <radialGradient id="glowE" cx="0.5" cy="0.55" r="0.55">
+      <stop offset="0" stop-color="#ffcc00" stop-opacity="0.45"/>
+      <stop offset="0.5" stop-color="#e59400" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#e59400" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="doorE" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffe9a0"/>
+      <stop offset="0.6" stop-color="#ffb020"/>
+      <stop offset="1" stop-color="#ffb020" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="flameE" cx="0.5" cy="0.4" r="0.6">
+      <stop offset="0" stop-color="#fff2c0"/>
+      <stop offset="0.5" stop-color="#ffb020"/>
+      <stop offset="1" stop-color="#ff6a00" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="scrimE" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0b0804" stop-opacity="0"/>
+      <stop offset="1" stop-color="#0b0804" stop-opacity="0.85"/>
+    </linearGradient>
+  </defs>
+
+  <!-- sky -->
+  <rect width="800" height="400" fill="url(#skyE)"/>
+  <!-- warm glow behind temple -->
+  <rect width="800" height="400" fill="url(#glowE)"/>
+
+  <!-- sun rays -->
+  <g fill="#ffcc00" opacity="0.10">
+    <polygon points="400,50 330,400 370,400"/>
+    <polygon points="400,50 410,400 450,400"/>
+    <polygon points="400,50 210,400 270,400"/>
+    <polygon points="400,50 520,400 580,400"/>
+    <polygon points="400,50 90,400 170,400"/>
+    <polygon points="400,50 640,400 720,400"/>
+  </g>
+
+  <!-- distant dunes -->
+  <path d="M0,300 Q200,270 400,296 T800,286 L800,400 L0,400 Z" fill="#0d0a05" opacity="0.7"/>
+
+  <!-- map contour lines + route (top-left) -->
+  <g stroke="#ffcc00" fill="none" opacity="0.16" stroke-width="1.4">
+    <path d="M60,70 q40,-14 78,4 q28,26 -6,44 q-46,18 -74,-8 q-18,-24 2,-40 Z"/>
+    <path d="M78,80 q26,-8 50,6 q16,18 -8,28 q-30,10 -46,-8 Z"/>
+  </g>
+  <g opacity="0.5">
+    <path d="M120,120 C180,150 150,190 220,205" stroke="#ffcc00" stroke-width="1.4" fill="none" stroke-dasharray="4 5"/>
+    <path d="M214,199 l12,4 l-4,12 z" fill="#ffcc00"/>
+  </g>
+
+  <!-- temple: stepped pyramid -->
+  <polygon fill="#14100a" points="250,345 250,313 280,313 280,281 310,281 310,249 340,249 340,217 370,217 370,190 430,190 430,217 460,217 460,249 490,249 490,281 520,281 520,313 550,313 550,345"/>
+  <!-- pyramid shading (left face lighter) -->
+  <polygon fill="#000000" opacity="0.35" points="400,190 400,345 550,345 550,313 520,313 520,281 490,281 490,249 460,249 460,217 430,217 430,190"/>
+
+  <!-- glowing doorway -->
+  <rect x="383" y="286" width="34" height="60" fill="url(#doorE)"/>
+  <rect x="390" y="298" width="20" height="48" fill="#2a1c08"/>
+
+  <!-- torches flanking doorway -->
+  <g>
+    <rect x="360" y="300" width="5" height="46" fill="#0a0803"/>
+    <ellipse cx="362.5" cy="298" rx="16" ry="22" fill="url(#flameE)"/>
+    <rect x="435" y="300" width="5" height="46" fill="#0a0803"/>
+    <ellipse cx="437.5" cy="298" rx="16" ry="22" fill="url(#flameE)"/>
+  </g>
+
+  <!-- foreground rocks -->
+  <path d="M0,360 q60,-26 130,-6 q40,14 96,4 L226,400 L0,400 Z" fill="#080602"/>
+  <path d="M800,362 q-70,-28 -150,-6 q-40,12 -84,6 L566,400 L800,400 Z" fill="#080602"/>
+
+  <!-- readability scrim -->
+  <rect x="0" y="250" width="800" height="150" fill="url(#scrimE)"/>
+</svg>

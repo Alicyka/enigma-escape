@@ -1,0 +1,105 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="skyD" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a0e0e"/>
+      <stop offset="0.55" stop-color="#1a0707"/>
+      <stop offset="1" stop-color="#0b0404"/>
+    </linearGradient>
+    <radialGradient id="moonD" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fff6e0"/>
+      <stop offset="0.7" stop-color="#ffd9a0"/>
+      <stop offset="1" stop-color="#ffd9a0" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="moonGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffcf8a" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#ffcf8a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="goldD" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe37a"/>
+      <stop offset="1" stop-color="#b8791a"/>
+    </linearGradient>
+    <radialGradient id="gemD" cx="0.5" cy="0.4" r="0.6">
+      <stop offset="0" stop-color="#eaffff"/>
+      <stop offset="0.5" stop-color="#7fd8ff"/>
+      <stop offset="1" stop-color="#2b7fb0" stop-opacity="0.2"/>
+    </radialGradient>
+    <linearGradient id="scrimD" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0b0404" stop-opacity="0"/>
+      <stop offset="1" stop-color="#0b0404" stop-opacity="0.88"/>
+    </linearGradient>
+    <radialGradient id="vignD" cx="0.5" cy="0.55" r="0.7">
+      <stop offset="0" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="0.7" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0.55"/>
+    </radialGradient>
+  </defs>
+
+  <!-- sky -->
+  <rect width="800" height="400" fill="url(#skyD)"/>
+
+  <!-- moon -->
+  <circle cx="612" cy="112" r="120" fill="url(#moonGlow)"/>
+  <circle cx="612" cy="112" r="52" fill="url(#moonD)"/>
+
+  <!-- mountains -->
+  <polygon fill="#160606" points="0,300 120,214 210,270 330,180 470,286 560,232 680,300 800,246 800,400 0,400"/>
+  <polygon fill="#0d0303" points="0,330 150,268 280,318 430,250 560,320 690,270 800,318 800,400 0,400"/>
+
+  <!-- DRAGON silhouette (flying, facing left toward hoard) -->
+  <g fill="#0a0303">
+    <!-- far wing -->
+    <path d="M300,150 C250,90 175,78 120,120 C165,116 190,140 205,168 C165,168 140,188 128,214 C170,196 205,196 236,206 C258,180 282,166 300,150 Z"/>
+    <!-- body + neck + head -->
+    <path d="M300,150
+             C340,140 372,150 396,176
+             C420,150 452,138 486,142
+             C470,150 456,166 452,186
+             C476,178 500,182 512,200
+             C486,196 462,206 446,226
+             C470,300 300,300 236,206
+             C268,196 292,176 300,150 Z"/>
+    <!-- near wing (big, over body) -->
+    <path d="M300,150 C360,84 452,70 520,112 C466,110 436,138 420,172 C462,168 492,190 506,222 C456,200 414,204 378,220 C346,192 316,172 300,150 Z"/>
+    <!-- head detail: horn + jaw -->
+    <path d="M486,142 C500,128 516,124 528,130 C518,132 512,140 512,150 C520,150 526,156 526,164 C516,158 502,158 492,166 C494,156 490,148 486,142 Z"/>
+    <!-- tail -->
+    <path d="M300,220 C280,250 250,268 214,266 C246,256 266,236 276,214 Z"/>
+  </g>
+  <!-- dragon eye ember -->
+  <circle cx="506" cy="150" r="3.2" fill="#ff8a1e"/>
+
+  <!-- ember particles -->
+  <g fill="#ffb020">
+    <circle cx="360" cy="250" r="2" opacity="0.8"/>
+    <circle cx="330" cy="280" r="1.5" opacity="0.6"/>
+    <circle cx="300" cy="240" r="1.6" opacity="0.7"/>
+    <circle cx="410" cy="270" r="1.4" opacity="0.6"/>
+    <circle cx="270" cy="300" r="1.8" opacity="0.5"/>
+  </g>
+
+  <!-- hoard of gold -->
+  <path d="M120,400 C260,320 540,320 680,400 Z" fill="url(#goldD)"/>
+  <path d="M120,400 C260,320 540,320 680,400 Z" fill="#000000" opacity="0.12"/>
+  <!-- coins -->
+  <g fill="#ffe37a" opacity="0.95">
+    <circle cx="250" cy="374" r="6"/><circle cx="270" cy="384" r="5"/>
+    <circle cx="330" cy="360" r="6"/><circle cx="360" cy="378" r="5"/>
+    <circle cx="440" cy="366" r="6"/><circle cx="470" cy="380" r="5"/>
+    <circle cx="540" cy="376" r="6"/><circle cx="200" cy="388" r="5"/>
+  </g>
+  <g fill="#b8791a" opacity="0.9">
+    <circle cx="250" cy="374" r="2.4"/><circle cx="330" cy="360" r="2.4"/>
+    <circle cx="440" cy="366" r="2.4"/><circle cx="540" cy="376" r="2.4"/>
+  </g>
+
+  <!-- central gem -->
+  <g>
+    <circle cx="400" cy="336" r="34" fill="url(#gemD)" opacity="0.5"/>
+    <polygon fill="url(#gemD)" points="400,312 420,332 400,360 380,332"/>
+    <polygon fill="#eaffff" opacity="0.8" points="400,312 410,332 400,344 390,332"/>
+  </g>
+
+  <!-- center vignette + scrim for text readability -->
+  <rect width="800" height="400" fill="url(#vignD)"/>
+  <rect x="0" y="250" width="800" height="150" fill="url(#scrimD)"/>
+</svg>

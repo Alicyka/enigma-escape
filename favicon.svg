@@ -1,0 +1,29 @@
+<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="flame" x1="0.5" y1="1" x2="0.5" y2="0">
+      <stop offset="0" stop-color="#e02424"/>
+      <stop offset="0.45" stop-color="#ff7a1a"/>
+      <stop offset="1" stop-color="#ffc21a"/>
+    </linearGradient>
+    <linearGradient id="flameIn" x1="0.5" y1="1" x2="0.5" y2="0">
+      <stop offset="0" stop-color="#ff7a1a"/>
+      <stop offset="1" stop-color="#fff3bf"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="15" fill="#1b110c"/>
+  <rect x="2" y="2" width="60" height="60" rx="13" fill="none" stroke="#ffc21a" stroke-opacity="0.4" stroke-width="1.5"/>
+  <path fill="url(#flame)" d="M34 7
+    c1 8 9 12 9 22
+    c0 12-8 24-11 24
+    c-4 0-14-6-14-19
+    c0-8 6-11 8-17
+    c1 5 5 6 4 0
+    c3-5 4-8 3-13
+    c1 2 4 4 5 8 z"/>
+  <path fill="url(#flameIn)" d="M33 27
+    c1 5 6 8 6 15
+    c0 7-4 12-6 12
+    c-3 0-8-4-8-11
+    c0-5 4-6 5-10
+    c1 3 3 3 3-2 z"/>
+</svg>

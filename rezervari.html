@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <script>document.documentElement.classList.add('js')</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rezervări - Enigma Escape</title>
+    <meta name="description" content="Enigma Escape - rezervă online camera The Lost Expedition. Sistem de rezervări în timp real.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Barlow:wght@400;500;600;700&display=swap">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" href="favicon.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+</head>
+<body>
+<nav>
+    <div class="container">
+        <a href="index.html" class="logo">ENIGMA<span>ESCAPE</span></a>
+        <button class="nav-toggle" aria-label="Deschide meniul" aria-expanded="false">&#9776;</button>
+        <ul>
+            <li><a href="index.html">Acasă</a></li>
+            <li><a href="lost-expedition.html">The Lost Expedition</a></li>
+            <li><a href="dragons-hoard.html">The Dragon's Hoard</a></li>
+            <li><a href="preturi.html">Prețuri</a></li>
+            <li><a href="rezervari.html">Rezervări</a></li>
+            <li><a href="vouchere.html">Vouchere</a></li>
+            <li><a href="petreceri.html">Petreceri</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<section class="section container">
+  <h1 style="text-align:center;">Rezervări</h1>
+  <p class="lead">Alege ziua și un slot disponibil, completează datele și trimite. Prețul se calculează automat.</p>
+
+  <div class="note">⚙️ <b>Demo:</b> formularul folosește Firebase Firestore. Înlocuiește <code>firebaseConfig</code> din pagină cu propriul proiect ca să salveze rezervările.</div>
+
+  <div class="booking">
+    <form id="formularRezervare" class="booking-form" novalidate>
+      <fieldset class="field-group">
+        <legend>Când</legend>
+        <div class="field-grid">
+          <div class="field">
+            <label for="dataRezervare">Ziua</label>
+            <input type="date" id="dataRezervare" name="data" required>
+          </div>
+          <div class="field">
+            <label for="Slot">Slot (90 min)</label>
+            <select id="Slot" name="Slot" required></select>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="field-group">
+        <legend>Detaliile tale</legend>
+        <div class="field-grid">
+          <div class="field"><label>Nume</label><input type="text" name="nume" required></div>
+          <div class="field"><label>Email</label><input type="email" name="email" required></div>
+          <div class="field"><label>Telefon</label><input type="tel" name="telefon" required></div>
+          <div class="field"><label>Număr persoane</label><input type="number" name="persoane" min="2" max="8" value="2" required></div>
+        </div>
+      </fieldset>
+
+      <fieldset class="field-group">
+        <legend>Opțiuni</legend>
+        <div class="field-grid">
+          <div class="field"><label>Voucher (opțional)</label><input type="text" name="voucher" placeholder="Cod voucher"></div>
+          <div class="field">
+            <label>Petrecere copii</label>
+            <select name="petrecere">
+              <option value="nu">Nu</option>
+              <option value="da_cu_GM">Da, cu game master (120 RON)</option>
+              <option value="da_fara_GM">Da, fără game master</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Nivel indicii</label>
+            <select name="nivel_indicii" required>
+              <option value="normal">Normal</option>
+              <option value="copii">Indicii pentru copii</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Limbă</label>
+            <select name="limba" required>
+              <option value="Română">Română</option>
+              <option value="Engleză">Engleză</option>
+              <option value="Franceză">Franceză</option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
+
+      <div id="msg" class="form-msg"></div>
+      <button type="submit" class="btn">Trimite rezervarea</button>
+    </form>
+
+    <aside class="booking-summary">
+      <h3>Rezervarea ta</h3>
+      <p class="sub">The Lost Expedition · 75 min</p>
+      <div class="summary-row"><span>Data</span><span id="sumData">—</span></div>
+      <div class="summary-row"><span>Ora</span><span id="sumOra">—</span></div>
+      <div class="summary-row"><span>Persoane</span><span id="sumPers">2</span></div>
+      <div class="summary-total">
+        <span class="label">Total estimat</span>
+        <span class="amount" id="sumTotal">—</span>
+      </div>
+      <p class="summary-note">Tarif automat: 70 RON (L–V, 10–17) sau 130 RON (seara / weekend / sărbători) + 60 RON/persoană.</p>
+    </aside>
+  </div>
+</section>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+  import { getFirestore, collection, onSnapshot, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+  // 🔑 Înlocuiește cu propriul tău proiect Firebase (Project settings > Your apps > SDK config)
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT.firebaseapp.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT.appspot.com",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId: "YOUR_APP_ID"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  const dateInput = document.getElementById("dataRezervare");
+  const select = document.getElementById("Slot");
+  const form = document.getElementById("formularRezervare");
+  const msg = document.getElementById("msg");
+  const persInput = form.persoane;
+  let ocupate = [];
+
+  dateInput.value = new Date().toISOString().split("T")[0];
+
+  function getProgram(zi) {
+    if ([1, 2, 3, 4].includes(zi)) return { start: [11, 30], end: [23, 45] };
+    if (zi === 5) return { start: [11, 30], end: [23, 30] };
+    if (zi === 6) return { start: [10, 0], end: [23, 45] };
+    if (zi === 0) return { start: [10, 0], end: [22, 45] };
+    return { start: [0, 0], end: [0, 0] };
+  }
+
+  function renderSlots() {
+    select.innerHTML = "";
+    const zi = new Date(dateInput.value).getDay();
+    const dateStr = dateInput.value;
+    const prog = getProgram(zi);
+    let h = prog.start[0], m = prog.start[1];
+    const endH = prog.end[0], endM = prog.end[1];
+    while (h * 60 + m <= endH * 60 + endM) {
+      const hh = String(h).padStart(2, "0");
+      const mm = String(m).padStart(2, "0");
+      const full = `${dateStr} ${hh}:${mm}`;
+      const opt = document.createElement("option");
+      opt.value = full;
+      if (ocupate.includes(full)) { opt.textContent = `${hh}:${mm} — ocupat`; opt.disabled = true; }
+      else { opt.textContent = `${hh}:${mm} — liber`; }
+      select.appendChild(opt);
+      m += 90; h += Math.floor(m / 60); m = m % 60;
+    }
+    updateSummary();
+  }
+
+  function priceFor(slotStr, n) {
+    if (!slotStr || !n) return null;
+    const [datePart, timePart] = slotStr.split(" ");
+    const zi = new Date(datePart).getDay();
+    const [hh, mm] = timePart.split(":").map(Number);
+    const minutes = hh * 60 + mm;
+    const weekend = (zi === 0 || zi === 6);
+    const evening = minutes >= (17 * 60 + 30);
+    const base = (weekend || evening) ? 130 : 70;
+    return base + 60 * n;
+  }
+
+  function fmtDate(str) {
+    if (!str) return "—";
+    return new Date(str).toLocaleDateString("ro-RO", { weekday: "short", day: "numeric", month: "short" });
+  }
+
+  function updateSummary() {
+    const slot = select.value;
+    const n = Number(persInput.value) || 0;
+    document.getElementById("sumData").textContent = fmtDate(dateInput.value);
+    document.getElementById("sumOra").textContent = slot ? slot.split(" ")[1] : "—";
+    document.getElementById("sumPers").textContent = n || "—";
+    const price = priceFor(slot, n);
+    document.getElementById("sumTotal").textContent = price ? price + " RON" : "—";
+  }
+
+  function showMsg(type, text) {
+    msg.textContent = text;
+    msg.className = "form-msg show " + type;
+  }
+
+  // Live occupied slots from Firestore
+  onSnapshot(collection(db, "rezervari"), (snap) => {
+    ocupate = snap.docs.map(d => d.id);
+    renderSlots();
+  });
+
+  dateInput.addEventListener("change", renderSlots);
+  select.addEventListener("change", updateSummary);
+  persInput.addEventListener("input", updateSummary);
+
+  renderSlots(); // ensure slots + price show even before Firebase responds
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!form.checkValidity()) { showMsg("err", "Completează toate câmpurile obligatorii."); return; }
+    const slot = select.value;
+    if (!slot) { showMsg("err", "Alege un slot disponibil."); return; }
+    try {
+      const ref = doc(db, "rezervari", slot);
+      const snap = await getDoc(ref);
+      if (snap.exists()) { showMsg("err", "Slotul tocmai a fost ocupat. Alege altul."); return; }
+      await setDoc(ref, {
+        nume: form.nume.value,
+        email: form.email.value,
+        telefon: form.telefon.value,
+        persoane: Number(form.persoane.value),
+        limba: form.limba.value,
+        voucher: form.voucher.value,
+        petrecere: form.petrecere.value,
+        nivel_indicii: form.nivel_indicii.value,
+        pret: priceFor(slot, Number(form.persoane.value)),
+        slot: slot,
+        timestamp: new Date()
+      });
+      showMsg("ok", `Rezervare confirmată pentru ${fmtDate(dateInput.value)}, ora ${slot.split(" ")[1]}. Te așteptăm!`);
+      form.reset();
+      dateInput.value = new Date().toISOString().split("T")[0];
+      renderSlots();
+    } catch (err) {
+      showMsg("err", "Firebase nu e configurat încă (demo). Adaugă firebaseConfig ca să salvezi rezervările.");
+    }
+  });
+</script>
+
+<footer>
+    <div class="foot-links">
+        <a href="termeni.html">Termeni și condiții</a>
+        <a href="confidentialitate.html">Confidențialitate</a>
+        <a href="gdpr.html">GDPR</a>
+        <a href="livrare.html">Livrare</a>
+        <a href="anulare.html">Anulare</a>
+    </div>
+    © 2026 Enigma Escape · Proiect demonstrativ realizat de Alice Aflorei
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

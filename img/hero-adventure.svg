@@ -1,0 +1,74 @@
+<svg viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="hsky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1a0f07"/>
+      <stop offset="0.5" stop-color="#2a1608"/>
+      <stop offset="0.78" stop-color="#5a2a0c"/>
+      <stop offset="1" stop-color="#140d08"/>
+    </linearGradient>
+    <radialGradient id="hsun" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fff3c4"/>
+      <stop offset="0.35" stop-color="#ffd24a"/>
+      <stop offset="0.7" stop-color="#ff8a1e" stop-opacity="0.7"/>
+      <stop offset="1" stop-color="#ff5a2c" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="hglow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ff9a3a" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#ff5a2c" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="hdoor" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fff0b0"/>
+      <stop offset="0.6" stop-color="#ffb020"/>
+      <stop offset="1" stop-color="#ffb020" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- sky -->
+  <rect width="1600" height="900" fill="url(#hsky)"/>
+  <!-- big warm glow on horizon -->
+  <ellipse cx="800" cy="660" rx="900" ry="360" fill="url(#hglow)"/>
+  <!-- sun/light source behind temple -->
+  <circle cx="800" cy="650" r="230" fill="url(#hsun)"/>
+
+  <!-- sun rays -->
+  <g fill="#ffd24a" opacity="0.12">
+    <polygon points="800,650 470,120 620,110"/>
+    <polygon points="800,650 980,110 1130,120"/>
+    <polygon points="800,650 250,300 360,230"/>
+    <polygon points="800,650 1350,300 1240,230"/>
+    <polygon points="800,650 700,90 780,90"/>
+    <polygon points="800,650 820,90 900,90"/>
+    <polygon points="800,650 120,520 200,430"/>
+    <polygon points="800,650 1480,520 1400,430"/>
+  </g>
+
+  <!-- distant dunes -->
+  <path d="M0,660 Q400,620 800,652 T1600,636 L1600,900 L0,900 Z" fill="#1a0e05" opacity="0.6"/>
+
+  <!-- temple: stepped pyramid silhouette -->
+  <polygon fill="#080502" points="620,706 620,644 680,644 680,582 740,582 740,520 800,520 800,478 860,478 860,520 920,520 920,582 980,582 980,644 1040,644 1040,706"/>
+  <!-- glowing doorway -->
+  <rect x="782" y="596" width="36" height="110" fill="url(#hdoor)"/>
+  <rect x="790" y="612" width="20" height="94" fill="#241a08"/>
+
+  <!-- palm silhouettes -->
+  <g fill="#060402">
+    <rect x="196" y="600" width="10" height="120"/>
+    <path d="M201,600 q-60,-20 -96,-2 q54,-6 96,18 q42,-24 96,-18 q-36,-18 -96,2 Z"/>
+    <rect x="1398" y="600" width="10" height="120"/>
+    <path d="M1403,600 q-60,-20 -96,-2 q54,-6 96,18 q42,-24 96,-18 q-36,-18 -96,2 Z"/>
+  </g>
+
+  <!-- foreground ground -->
+  <path d="M0,760 Q400,712 820,752 T1600,742 L1600,900 L0,900 Z" fill="#050301"/>
+
+  <!-- embers -->
+  <g fill="#ffb020">
+    <circle cx="620" cy="560" r="3" opacity="0.8"/>
+    <circle cx="980" cy="520" r="2.4" opacity="0.7"/>
+    <circle cx="700" cy="470" r="2" opacity="0.6"/>
+    <circle cx="900" cy="600" r="2.6" opacity="0.7"/>
+    <circle cx="520" cy="640" r="2" opacity="0.5"/>
+    <circle cx="1120" cy="600" r="2.2" opacity="0.6"/>
+  </g>
+</svg>
