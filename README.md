@@ -1,5 +1,7 @@
 # Enigma Escape — Escape Room Website (demo)
 
+**🔗 Live demo: https://alicyka.github.io/enigma-escape/**
+
 A responsive multi-page website for a fictional escape room business, built with **HTML, CSS and vanilla JavaScript**, plus a **Firebase Firestore** real-time booking system.
 
 > This is a portfolio/demo project. It is a rebranded version of a booking site I originally built for a real escape room business; all names, images, contact details and API keys have been replaced with generic placeholders.
